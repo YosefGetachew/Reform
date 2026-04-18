@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>የግብርና ሴክተር እና ተጠሪ ተቋማት | የአፈጻጸም መከታተያ</title>
+
+  <style>
+    :root{
+      --primary:#2e7d32;
+      --primary-2:#1b5e20;
+      --surface: rgba(255,255,255,0.92);
+      --overlay: rgba(117, 66, 66, 0.55);
+      --text:#111;
+      --muted:#4b5563;
+      --radius:12px;
+      --shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    /* Full background image */
+    .bg-img{
+      background-image: url("https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 24px 16px 40px;
+      gap: 14px;
+    }
+
+    .container{
+      width: min(1100px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero{
+      background: var(--overlay);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1{
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .hero p{
+      margin: 10px 0 0;
+      font-size: 14px;
+      opacity: .95;
+    }
+
+    /* Tab container */
+    .tab{
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      background-color: rgba(241,241,241,0.95);
+      border-radius: var(--radius);
+      padding: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .tab button{
+      background-color: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      padding: 12px 14px;
+      font-size: 14px;
+      transition: 0.2s;
+      flex: 1 1 190px;
+      text-align: center;
+      color: #111;
+    }
+
+    .tab button:hover{
+      transform: translateY(-1px);
+      border-color: rgba(46,125,50,0.35);
+    }
+
+    .tab button.active{
+      background-color: var(--primary);
+      color: white;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    /* Tab content */
+    .tabcontent{
+      display: none;
+      background-color: var(--surface);
+      padding: 18px 16px;
+      margin: 0;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .tabcontent h3{
+      margin: 0 0 10px;
+      color: #0f172a;
+      font-size: 18px;
+    }
+
+    .note{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .auth{
+      margin: 0 0 14px;
+      padding: 12px 12px;
+      border-radius: 10px;
+      background: rgba(46,125,50,0.08);
+      border: 1px solid rgba(46,125,50,0.22);
+      color: #0f172a;
+      font-size: 14px;
+    }
+
+    .auth strong{
+      display: inline-block;
+      margin-bottom: 6px;
+      color: #0f172a;
+    }
+
+    .tabcontent a{
+      background-color: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    .tabcontent a:hover{
+      background-color: var(--primary-2);
+    }
+
+    footer{
+      margin-top: 4px;
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.35);
+      padding: 10px 12px;
+      border-radius: 10px;
+      width: min(1100px, 100%);
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-img">
+    <div class="container">
+      <div class="hero">
+        <h1>የግብርና ሴክተር እና ተጠሪ ተቋማት የትራንስፎርሜሽን ሪፎርም ዕቅድ አፈጻጸም መከታተያ</h1>
+        <p>Click on the buttons below to access your sector's tracking sheet</p>
+      </div>
+
+      <div class="tab" role="tablist" aria-label="ተቋማት ምርጫ">
+        <button class="tablinks" role="tab" aria-controls="ግብርና ሚኒስቴር" onclick="openInst(event, 'ግብርና ሚኒስቴር')">ግብርና ሚኒስቴር</button>
+        <button class="tablinks" role="tab" aria-controls="ቡናና ሻይ ባለሥልጣን" onclick="openInst(event, 'ቡናና ሻይ ባለሥልጣን')">ቡናና ሻይ ባለሥልጣን</button>
+        <button class="tablinks" role="tab" aria-controls="ግብርና ምርምር" onclick="openInst(event, 'ግብርና ምርምር')">ግብርና ምርምር</button>
+        <button class="tablinks" role="tab" aria-controls="ግብርና ባለስልጣን" onclick="openInst(event, 'ግብርና ባለስልጣን')">ግብርና ባለስልጣን</button>
+        <button class="tablinks" role="tab" aria-controls="ህብረት ስራ" onclick="openInst(event, 'ህብረት ስራ')">ህብረት ስራ</button>
+        <button class="tablinks" role="tab" aria-controls="ብዝሀ ሕይወት" onclick="openInst(event, 'ብዝሀ ሕይወት')">ብዝሀ ሕይወት</button>
+        <button class="tablinks" role="tab" aria-controls="እንስሳት ልማት" onclick="openInst(event, 'እንስሳት ልማት')">እንስሳት ልማት</button>
+        <button class="tablinks" role="tab" aria-controls="ደን ልማት" onclick="openInst(event, 'ደን ልማት')">ደን ልማት</button>
+        <button class="tablinks" role="tab" aria-controls="የግብርና ትራንስፎርሜሽን" onclick="openInst(event, 'የግብርና ትራንስፎርሜሽን')">የግብርና ትራንስፎርሜሽን</button>
+        <button class="tablinks" role="tab" aria-controls="የእንስሳት ጤና" onclick="openInst(event, 'የእንስሳት ጤና')">የእንስሳት ጤና</button>
+      </div>
+
+      <div id="ግብርና ሚኒስቴር" class="tabcontent" role="tabpanel">
+        <h3>ግብርና ሚኒስቴር</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ ግብርና ሚኒስቴር — ጌታነህ ገብረማርያም (0913818161) — getaneh2111@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/ESTEc1QFFWJPuDHRSlolSWsBF363C-b7-6zEHeT4_zUGKg?e=1mYMNE" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="ቡናና ሻይ ባለሥልጣን" class="tabcontent" role="tabpanel">
+        <h3>ቡናና ሻይ ባለሥልጣን</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ ቡናና ሻይ ባለሥልጣን — ስንታየሁ ግርማ (0900065962) — sintayehugirma76@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/EXrJ7Lc6vjZKoRvg5dh6ftsBaJz9ZA3k9lzVzbc44H7yIg" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="ግብርና ምርምር" class="tabcontent" role="tabpanel">
+        <h3>ግብርና ምርምር</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ ግብርና ምርምር ኢንስቲትዩት — አለሙ አስረስ (0911874066) — alemuasres2016@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/EQlcBEho6RZLihb7iWOX5roBYIPJcQR3zxMZdd-EicJmHA" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="ግብርና ባለስልጣን" class="tabcontent" role="tabpanel">
+        <h3>ግብርና ባለስልጣን</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ ግብርና ባለስልጣን የግብርና ሬጉላቶሪ — አንማው ልንገረው (0924424072) — animawyehenaw0@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/EYMvJMBn3BZNvgDcPsT_1CUBTiklddvAZzysjVITOMTGAA" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="ህብረት ስራ" class="tabcontent" role="tabpanel">
+        <h3>ህብረት ስራ</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ ኅብረት ስራ ኮሚሽን — አያልሰው ወርቅነህ (0911060923) — ayalseww@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/EUtXbb6Uig1BjUcUW2l0QoIBOx7EhcT7Tf5F6qurIMnTEQ?e=KQ2JuN" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="ብዝሀ ሕይወት" class="tabcontent" role="tabpanel">
+        <h3>ብዝሀ ሕይወት</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ ብዝሀ ህይወት ኢንስቲትዩት — Aberaham Assfa (0911464607) — abiab1975@gmail.com<br/>
+          እና Hiwot Befekadu (0947902848) — hiwotnew@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/ETHJCIwAOe5GtPpZVElNDCwBXr1QXdr4ZTcL5Kt1WyFtAQ" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="እንስሳት ልማት" class="tabcontent" role="tabpanel">
+        <h3>እንስሳት ልማት</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ እንስሳት ልማት ኢንስቲትዩት — ታምሩ ነገራ (0911482605) — tnegera@yahoo.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/EUJ3lf9r9jxMlmnQjCGWDSkBQa-BkGtkJTtkxRmIUUm24Q?e=vQMQyd" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="ደን ልማት" class="tabcontent" role="tabpanel">
+        <h3>ደን ልማት</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ ደን ልማት — ብዙነህ ጅሩ (0911078786) — bizunehjiru@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/EadzRd9h8ZJAhAvL1Y0gYhkBFTl5dxXzTco7uLDLJGQvsg?e=0lSxgD" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="የግብርና ትራንስፎርሜሽን" class="tabcontent" role="tabpanel">
+        <h3>የግብርና ትራንስፎርሜሽን</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የግብርና ትራንስፎርሜሽን ኢንስቲትዩት — ተስፋዬ ደጌ (911897723) — tesfaye.digie@ata.gov.et
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/Ec8Wmj0STPFKts4rOlmB9FsBJveSzBF4XYuYNzAKxnwaPw" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+
+      <div id="የእንስሳት ጤና" class="tabcontent" role="tabpanel">
+        <h3>የእንስሳት ጤና ኢንስቲትዩት</h3>
+        <p class="note">የተቋሙ የአፈጻጸም መከታተያ ሰነድ</p>
+        <div class="auth">
+          <strong>This link is authorized to only</strong><br/>
+          የኢትዮጵያ እንስሳት ጤና ኢንስቲትዩት — ታደሰ ፍቅሩ (0912209595) — tadessefikru933@gmail.com<br/>
+          እና የሺጥላ እሸቴ (0912684301) — yeshitilaeshete@gmail.com
+        </div>
+        <a href="https://1drv.ms/x/c/e63e0be48aa1dd6c/EXIhsXKpaQZKu2Pa1jerAxgBPPsn1JM4Ai42bQI2E9X09A?e=jsxWjH" target="_blank" rel="noopener">መከታተያ ሰነድ ክፈት (OneDrive)</a>
+      </div>
+    </div>
+
+    <footer>
+      ማስታወሻ፦ ይህ ገጽ የተፈቀደላቸው ተቋማት ብቻ እንዲጠቀሙበት የተዘጋጀ ነው። ማገናኞቹ በOneDrive ላይ ይከፈታሉ።
+    </footer>
+  </div>
+
+  <script>
+    function openInst(evt, instName) {
+      var i, tabcontent, tablinks;
+
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].setAttribute("aria-selected", "false");
+      }
+
+      document.getElementById(instName).style.display = "block";
+      evt.currentTarget.className += " active";
+      evt.currentTarget.setAttribute("aria-selected", "true");
+    }
+
+    // Open the first tab by default
+    window.addEventListener("DOMContentLoaded", function () {
+      var first = document.querySelector(".tablinks");
+      if (first) first.click();
+    });
+  </script>
+</body>
+</html>
